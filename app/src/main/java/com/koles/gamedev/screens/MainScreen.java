@@ -3,10 +3,18 @@ import com.koles.gamedev.engin.Game;
 import com.koles.gamedev.engin.Settings;
 import com.koles.gamedev.graphic.Assets;
 import com.koles.gamedev.graphic.Graphics;
+import com.koles.gamedev.media.GameMusicPlayer;
+import com.koles.gamedev.media.Music;
 
 public class MainScreen extends Screen{
+    private Music player;
     public MainScreen(Game game){
         super(game);
+        game.setDescriptor("background_sound.ogg");
+        player = new GameMusicPlayer(game.getDescriptor());
+        player.setLooping(true);
+
+
 
     }
 
@@ -34,15 +42,17 @@ public class MainScreen extends Screen{
 
     @Override
     public void pause() {
-
+        player.pause();
     }
 
     @Override
     public void resume() {
-
+        player.play();
     }
 
     @Override
     public void dispose() {
+        player.dispose();
+        player = null;
     }
 }

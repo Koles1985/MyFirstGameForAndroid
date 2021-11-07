@@ -33,7 +33,6 @@ public class GameClass extends Activity implements Game{
     private Bitmap frameBuffer;
     private RenderView renderView;
     private FileIO fileIO;
-    private Music player;
     private AssetFileDescriptor descriptor;
     private String path = Environment.getExternalStorageDirectory().getPath();
     @Override
@@ -54,8 +53,6 @@ public class GameClass extends Activity implements Game{
 
         frameBuffer = Bitmap.createBitmap(frameBufferWidth, frameBufferHeight,
                 Bitmap.Config.ARGB_8888);
-        System.out.println("framaBufferWidth = " + frameBufferWidth);
-        System.out.println("framaBufferHeight = " + frameBufferHeight);
         System.out.println("scaleX = " + scaleX);
         System.out.println("scaleY = " + scaleY);
         System.out.println("displayMetrics.widthPixels = " + displayMetrics.widthPixels);
@@ -68,6 +65,8 @@ public class GameClass extends Activity implements Game{
         setContentView(renderView);
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -79,7 +78,6 @@ public class GameClass extends Activity implements Game{
     protected void onPause() {
         super.onPause();
         renderView.pause();
-        player.pause();
         if(isFinishing()){
             dispose();
         }

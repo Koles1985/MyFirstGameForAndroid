@@ -24,8 +24,8 @@ public class GameMusicPlayer implements Music, MediaPlayer.OnCompletionListener 
             Log.d("GameMusicPlayer", e1.getMessage() + " GameMusicPlayer constructor");
             player = null;
         }
-
     }
+
 
     @Override
     public void play() {

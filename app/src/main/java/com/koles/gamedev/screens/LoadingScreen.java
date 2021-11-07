@@ -6,13 +6,24 @@ import com.koles.gamedev.engin.Game;
 import com.koles.gamedev.graphic.Assets;
 import com.koles.gamedev.graphic.GameGraphics;
 import com.koles.gamedev.graphic.Graphics;
+import com.koles.gamedev.input.Pool;
 import com.koles.gamedev.media.GameMusicPlayer;
+import com.koles.gamedev.media.Music;
 
 import java.io.IOException;
 
 public class LoadingScreen extends Screen{
+    Music player;
     public LoadingScreen(Game game){
         super(game);
+        Pool.PoolObjectFactory<String> factory = new Pool.PoolObjectFactory<String>() {
+            @Override
+            public String createObject() {
+                return new String();
+            }
+        };
+        Pool<String> pool = new Pool<String>(factory, 20);
+
     }
 
     @Override
@@ -44,5 +55,6 @@ public class LoadingScreen extends Screen{
 
     @Override
     public void dispose() {
+
     }
 }
