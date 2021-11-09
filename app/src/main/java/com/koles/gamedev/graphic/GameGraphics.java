@@ -70,6 +70,31 @@ public class GameGraphics implements Graphics{
     }
 
     @Override
+    public void drawText(Bitmap bitmap, String text, int x, int y) {
+        char character;
+        int spaceX = 45;
+        for(int i = 0; i < text.length(); i++){
+            character = text.charAt(i);
+            if(character == ' '){
+                x += spaceX;
+                continue;
+            }
+            int srcX = 0;
+            int srcWidth = 0;
+            if(character == '.'){
+                srcX = 485;
+                srcWidth = 13;
+            }else{
+                srcX = (character - '0') * 50;
+                srcWidth = 50;
+            }
+
+            drawBitmap(bitmap, x, y, srcX, 0, srcWidth, 50);
+            x += srcWidth;
+        }
+    }
+
+    @Override
     public int getWidth() {
         return frameBuffer.getWidth();
     }

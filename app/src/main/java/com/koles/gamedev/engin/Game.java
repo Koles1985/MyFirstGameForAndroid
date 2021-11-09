@@ -3,6 +3,7 @@ package com.koles.gamedev.engin;
 import android.content.res.AssetFileDescriptor;
 
 import com.koles.gamedev.graphic.Graphics;
+import com.koles.gamedev.input.Input;
 import com.koles.gamedev.io.FileIO;
 import com.koles.gamedev.media.GameMusicPlayer;
 import com.koles.gamedev.media.Media;
@@ -17,8 +18,9 @@ public interface Game {
 
     Graphics getGraphics();
     FileIO getFileIO();
-    void setDescriptor(String fileName);
-    AssetFileDescriptor getDescriptor();
+    Input getInput();
+    Media getMedia();
+
 
     void dispose();
 }

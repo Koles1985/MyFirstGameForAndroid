@@ -17,8 +17,13 @@ import androidx.annotation.Nullable;
 import com.koles.gamedev.graphic.Assets;
 import com.koles.gamedev.graphic.GameGraphics;
 import com.koles.gamedev.graphic.Graphics;
+import com.koles.gamedev.input.GameInput;
+import com.koles.gamedev.input.GameMultiTouchHandler;
+import com.koles.gamedev.input.Input;
+import com.koles.gamedev.input.TouchHandler;
 import com.koles.gamedev.io.FileIO;
 import com.koles.gamedev.io.GameFileIO;
+import com.koles.gamedev.media.GameMedia;
 import com.koles.gamedev.media.GameMusicPlayer;
 import com.koles.gamedev.media.Media;
 import com.koles.gamedev.media.Music;
@@ -33,8 +38,11 @@ public class GameClass extends Activity implements Game{
     private Bitmap frameBuffer;
     private RenderView renderView;
     private FileIO fileIO;
-    private AssetFileDescriptor descriptor;
+    private Input gameInput;
+    private Media media;
     private String path = Environment.getExternalStorageDirectory().getPath();
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +65,12 @@ public class GameClass extends Activity implements Game{
         System.out.println("scaleY = " + scaleY);
         System.out.println("displayMetrics.widthPixels = " + displayMetrics.widthPixels);
         System.out.println("displayMetrics.heightPixels = " + displayMetrics.heightPixels);
+        renderView = new RenderView(this, frameBuffer);
         fileIO = new GameFileIO(getAssets());
         graphics = new GameGraphics(frameBuffer, getAssets());
+        gameInput = new GameInput(this, renderView, scaleX, scaleY);
+        media = new GameMedia(this);
         screen = getStartScreen();
-        renderView = new RenderView(this, frameBuffer);
         System.out.println("GameClass.path = " + path);
         setContentView(renderView);
     }
@@ -116,19 +126,14 @@ public class GameClass extends Activity implements Game{
         return fileIO;
     }
 
-
     @Override
-    public void setDescriptor(String fileName){
-        descriptor = null;
-        try{
-            descriptor = getAssets().openFd("sound" + File.separator + fileName);
-        }catch (IOException e){
-            Log.d("GameClass", e.getMessage() + " GameClass.getDescriptor - ex");
-        }
+    public Input getInput() {
+        return gameInput;
     }
 
-    public AssetFileDescriptor getDescriptor(){
-        return descriptor;
+    @Override
+    public Media getMedia() {
+        return media;
     }
 
     @Override

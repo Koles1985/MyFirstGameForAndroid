@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.util.Log;
 
+import com.koles.gamedev.engin.Settings;
 import com.koles.gamedev.graphic.Assets;
 
 import java.io.IOException;
@@ -12,8 +13,10 @@ import java.io.IOException;
 public class GameMusicPlayer implements Music, MediaPlayer.OnCompletionListener {
     private MediaPlayer player;
     private boolean isPrepare = false;
+    private int count = 0;
     public GameMusicPlayer(AssetFileDescriptor descriptor){
         player = new MediaPlayer();
+        count++;
         try{
             player.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(),
                     descriptor.getLength());
@@ -26,6 +29,10 @@ public class GameMusicPlayer implements Music, MediaPlayer.OnCompletionListener 
         }
     }
 
+    @Override
+    public int getCount() {
+        return count;
+    }
 
     @Override
     public void play() {
@@ -96,7 +103,6 @@ public class GameMusicPlayer implements Music, MediaPlayer.OnCompletionListener 
                 player.stop();
             }
             player.release();
-            player = null;
         }
     }
 

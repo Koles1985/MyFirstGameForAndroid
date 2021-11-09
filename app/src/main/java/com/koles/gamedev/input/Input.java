@@ -37,7 +37,7 @@ public interface Input {
             return y;
         }
 
-        public void setPointer(int pointer) {
+        public void setPointerId(int pointer) {
             this.pointer = pointer;
         }
 
@@ -49,5 +49,5 @@ public interface Input {
     boolean isTouchDown(int pointer);
     int getTouchX(int pointer);
     int getTouchY(int pointer);
-    List<TouchEvent> touchEvents();
+    List<TouchEvent> getTouchEventsList();
 }

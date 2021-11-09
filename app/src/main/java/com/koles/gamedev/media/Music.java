@@ -17,5 +17,7 @@ public interface Music {
     boolean isPlaying();
     boolean isStopped();
 
+    int getCount();
+
     void dispose();
 }
